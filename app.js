@@ -7,11 +7,23 @@ const port = process.env.PORT || 3004;
 // Import routes
 const HealthRoutes = require('./src/routes/health.routes');
 
-
 app.use(Express.json());
 
 HealthRoutes.registerHealthRoutes(app);
 
+const agentRoutes = require('./src/routes/agent.route')
+
+app.use(Express.json());
+
+agentRoutes.agentRoutes(app);
+
+
+const MongoManager = require('./src/shared/db/mongodb/mongo-manager')
+MongoManager.openMongoConnection();
+
 app.listen(port, () => {
     console.log(`server is listening on port ${port}`)
 })
+
+
+
