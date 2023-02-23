@@ -49,6 +49,29 @@ const agentsRegion = async (req, res, next) => {
 
     // Update agents //
 
-    
-
-module.exports = { create, showAgents, agentsRegion };
+    const updateAgentInfo = async (req, res, next) => {
+        try {
+          const { first_name, last_name, email, region } = req.body;
+      
+          // Find the agent by their first and last name
+          const agent = await agents.findOne({ first_name, last_name });
+      
+          if (!agent) {
+            return res.status(404).json({ error: 'Agent not found' });
+          }
+      
+          // Update the agent's information
+          agent.first_name = first_name;
+          agent.last_name = last_name;
+          agent.email = email;
+          agent.region = region;
+          const result = await agent.save();
+      
+          res.status(200).json({ message: 'Agent information updated successfully!', agent: result });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'An error occurred while updating the agent information.' });
+        }
+      };
+      
+module.exports = { create, showAgents, agentsRegion, updateAgentInfo };

@@ -5,6 +5,9 @@ const agentRoutes = (app) => {
     app.post('/create', agentController.create);;
     app.get('/agents', agentController.showAgents);;
     app.get('/agents-by-region', agentController.agentsRegion);;
+    app.put('/agent-update-info', agentController.updateAgentInfo);;
 }
+
+
 
 module.exports = {agentRoutes};
