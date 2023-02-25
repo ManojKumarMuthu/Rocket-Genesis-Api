@@ -1,4 +1,4 @@
-const agents = require('../shared/db/mongodb/schemas');
+const agents = require('../shared/db/mongodb/schemas').agents;
 
     // Create new agent // 
 
@@ -12,7 +12,7 @@ const create = async (req, res, next) => {
       region,
       rating: 0,
       fee: 0,
-      sale: 0
+      sales: 0
     });
     const result = await agent.save();
     res.status(201).json({ message: 'Agent created successfully!', agent: result });
